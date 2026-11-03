@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d1b">
+<title>Rafsan Automation Wen</title>
+<style>
+:root{--bg:#080d1b;--panel:#111a2d;--line:#263552;--text:#edf3ff;--muted:#9aabc8;--blue:#4d8dff;--cyan:#35d6d0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 10% 0%,#14294a 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+.wrap{width:min(960px,calc(100% - 28px));margin:auto;padding:28px 0 50px}
+header{display:flex;align-items:center;gap:14px;margin:8px 0 28px}.logo{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#061225;font-weight:900;font-size:19px;box-shadow:0 8px 28px #287cff44}
+h1{font-size:clamp(21px,4vw,30px);margin:0;letter-spacing:-.6px}.sub{color:var(--muted);margin:2px 0 0;font-size:13px}
+.hero{padding:25px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,#142442dd,#10192bdd);box-shadow:0 20px 60px #0004}
+.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase}.hero h2{font-size:clamp(23px,5vw,36px);line-height:1.13;margin:9px 0}.hero p{color:var(--muted);max-width:650px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+.card{border:1px solid var(--line);border-radius:18px;background:#10192b;padding:19px;min-height:150px;display:flex;flex-direction:column;gap:9px}
+.card .ico{font-size:23px}.card h3{margin:0;font-size:17px}.card p{margin:0;color:var(--muted);font-size:13px;flex:1}
+a.btn,button{display:inline-flex;justify-content:center;align-items:center;border:0;border-radius:11px;padding:11px 14px;background:linear-gradient(100deg,var(--blue),#3473e8);color:white;text-decoration:none;font-weight:700;cursor:pointer;font:inherit;font-weight:700}
+a.btn.secondary,button.secondary{background:#1b2942;border:1px solid #344766;color:var(--text)}
+.tools{margin-top:20px;padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.tools h3{margin:0 0 12px}.field{display:flex;gap:9px;flex-wrap:wrap}.field input{flex:1;min-width:190px;background:#080f1e;border:1px solid #344766;border-radius:11px;padding:12px;color:var(--text);font:inherit;outline:none}.field input:focus{border-color:var(--blue)}
+.note{color:var(--muted);font-size:12px;margin-top:10px}footer{text-align:center;color:#7284a4;font-size:12px;margin-top:25px}
+@media(max-width:520px){.wrap{padding-top:18px}.hero{padding:20px}.grid{grid-template-columns:1fr 1fr;gap:10px}.card{padding:14px;min-height:165px}.card h3{font-size:15px}.card p{font-size:12px}.card .btn{font-size:12px;padding:10px 8px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header><div class="logo">RA</div><div><h1>Rafsan Automation Wen</h1><p class="sub">Your personal web shortcuts dashboard</p></div></header>
+<section class="hero">
+<div class="eyebrow">Welcome</div>
+<h2>Simple tools. Quick access.</h2>
+<p>Open your frequently used Facebook pages and web tools from one clean, mobile-friendly dashboard.</p>
+</section>
+<section class="grid" aria-label="Quick links">
+<article class="card"><div class="ico">🌐</div><h3>Facebook</h3><p>Open the official Facebook website in a new tab.</p><a class="btn" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Open Facebook ↗</a></article>
+<article class="card"><div class="ico">🔐</div><h3>Accounts Center</h3><p>Manage your account and security settings directly on Meta.</p><a class="btn" href="https://accountscenter.facebook.com/" target="_blank" rel="noopener noreferrer">Open Accounts Center ↗</a></article>
+<article class="card"><div class="ico">🛡️</div><h3>Two-factor settings</h3><p>Visit the official two-factor authentication settings page.</p><a class="btn" href="https://accountscenter.facebook.com/password_and_security/two_factor" target="_blank" rel="noopener noreferrer">Open 2FA Settings ↗</a></article>
+<article class="card"><div class="ico">📱</div><h3>Mobile Facebook</h3><p>Open Facebook's mobile website.</p><a class="btn" href="https://m.facebook.com/" target="_blank" rel="noopener noreferrer">Open Mobile Site ↗</a></article>
+</section>
+<section class="tools">
+<h3>Open a custom website</h3>
+<div class="field"><input id="customUrl" type="url" placeholder="https://example.com" autocomplete="url"><button id="openCustom">Open URL ↗</button></div>
+<p class="note">Only enter a website address you trust. This dashboard does not collect or store Facebook passwords, login codes, cookies, or access tokens.</p>
+</section>
+<footer>© <span id="year"></span> Rafsan Automation Wen · Independent shortcut dashboard</footer>
+</main>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('openCustom').addEventListener('click',()=>{
+  const field=document.getElementById('customUrl');
+  let value=field.value.trim();
+  if(!value){alert('Please enter a website URL.');return;}
+  if(!/^https?:\/\//i.test(value)) value='https://'+value;
+  try{const u=new URL(value);if(!['http:','https:'].includes(u.protocol))throw 0;window.open(u.href,'_blank','noopener,noreferrer');}
+  catch(e){alert('Please enter a valid http or https website address.');}
+});
+</script>
+</body></html>
